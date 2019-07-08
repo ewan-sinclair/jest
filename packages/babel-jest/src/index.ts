@@ -78,7 +78,7 @@ const createTransformer = (
       ];
 
       return crypto
-        .createHash('md5')
+        .createHash('sha256')
         .update(THIS_FILE)
         .update('\0', 'utf8')
         .update(JSON.stringify(babelOptions.options))

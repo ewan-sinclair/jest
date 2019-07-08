@@ -88,7 +88,7 @@ export default class ScriptTransformer {
 
     if (transformer && typeof transformer.getCacheKey === 'function') {
       return crypto
-        .createHash('md5')
+        .createHash('sha256')
         .update(
           transformer.getCacheKey(fileData, filename, configString, {
             config: this._config,
@@ -100,7 +100,7 @@ export default class ScriptTransformer {
         .digest('hex');
     } else {
       return crypto
-        .createHash('md5')
+        .createHash('sha256')
         .update(fileData)
         .update(configString)
         .update(instrument ? 'instrument' : '')
@@ -477,7 +477,7 @@ const stripShebang = (content: string) => {
  */
 function writeCodeCacheFile(cachePath: Config.Path, code: string) {
   const checksum = crypto
-    .createHash('md5')
+    .createHash('sha256')
     .update(code)
     .digest('hex');
   writeCacheFile(cachePath, checksum + '\n' + code);
@@ -496,7 +496,7 @@ function readCodeCacheFile(cachePath: Config.Path): string | null {
   }
   const code = content.substr(33);
   const checksum = crypto
-    .createHash('md5')
+    .createHash('sha256')
     .update(code)
     .digest('hex');
   if (checksum === content.substr(0, 32)) {

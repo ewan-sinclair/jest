@@ -57,7 +57,7 @@ afterEach(() => {
 it('picks a name based on the rootDir', () => {
   const rootDir = '/root/path/foo';
   const expected = crypto
-    .createHash('md5')
+    .createHash('sha256')
     .update('/root/path/foo')
     .update(String(Infinity))
     .digest('hex');

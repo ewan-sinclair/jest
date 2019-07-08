@@ -298,7 +298,7 @@ const normalizeMissingOptions = (
 ): Config.InitialOptions => {
   if (!options.name) {
     options.name = crypto
-      .createHash('md5')
+      .createHash('sha256')
       .update(options.rootDir)
       // In case we load config from some path that has the same root dir
       .update(configPath || '')
